@@ -84,8 +84,6 @@ public class UserManager {
        return n;
     }
 
-
-
     private Boolean verifyCookies(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (Objects.isNull(cookies)){
