@@ -14,11 +14,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AddUserTest {
 
     @Test(dependsOnGroups = "loginTrue",description = "添加用户接口测试")
-    public void addUser() throws IOException {
+    public void addUser() throws IOException, InterruptedException {
         SqlSession session = DatabaseUtil.getSqlSession();
         AdduserCase adduserCase = session.selectOne("adduserCase",1);
         System.out.println(adduserCase.toString());
@@ -26,8 +27,12 @@ public class AddUserTest {
 
         String result = getResult(adduserCase);
 
-//        User user = session.selectOne("addUser",adduserCase);
-//        System.out.println(user.toString());
+        Thread.sleep(3000);
+
+        List<User> userList = session.selectList("addUser",adduserCase);
+        for (User u:userList){
+            System.out.println(u.toString());
+        }
         Assert.assertEquals(result,adduserCase.getExpected());
     }
 
@@ -44,6 +49,7 @@ public class AddUserTest {
         StringEntity entity = new StringEntity(param.toString(),"utf-8");
         post.setEntity(entity);
         ConfigFileName.client.setCookieStore(ConfigFileName.store);
+        System.out.println(ConfigFileName.store);
         HttpResponse response = ConfigFileName.client.execute(post);
         String result = EntityUtils.toString(response.getEntity(),"utf-8");
         System.out.println(result);

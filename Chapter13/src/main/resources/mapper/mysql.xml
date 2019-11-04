@@ -38,15 +38,12 @@
     </select>
     <update id="updateUser" parameterType="com.course.model.User">
         update user
-        <trim suffix="SET" suffixOverrides=",">
+        <trim prefix="SET" suffixOverrides=",">
             <if test="null != userName and '' != userName">
                 userName = #{userName},
             </if>
-            <if test="null != password and '' != password">
-                password = #{password},
-            </if>
             <if test="null != sex and '' != sex">
-                sex = #{sex}
+                sex = #{sex},
             </if>
             <if test="null != age and '' != age">
                 age = #{age},
@@ -55,8 +52,9 @@
                 permission = #{permission},
             </if>
             <if test="null != isDelete and '' != isDelete">
-                isDelete = #{isDelete};
+                isDelete = #{isDelete},
             </if>
         </trim>
+        where id = #{id};
     </update>
 </mapper>

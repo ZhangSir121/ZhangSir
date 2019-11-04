@@ -67,7 +67,7 @@ public class LoginTest {
         HttpResponse response = ConfigFileName.client.execute(post);
         String result = EntityUtils.toString(response.getEntity(),"utf-8");
         System.out.println(result);
-        ConfigFileName.client.getCookieStore();
+        ConfigFileName.store = ConfigFileName.client.getCookieStore();
         return result;
     }
 

@@ -69,7 +69,7 @@ public class UserManager {
     }
 
     @ApiOperation(value = "更新/删除用户接口测试",httpMethod = "POST")
-    @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserInfo",method = RequestMethod.POST)
     public int updateUser(HttpServletRequest request,@RequestBody User user){
         Boolean b = verifyCookies(request);
         int n = 0;
